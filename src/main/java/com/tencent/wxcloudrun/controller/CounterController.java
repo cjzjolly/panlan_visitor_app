@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.controller;
 
+import com.tencent.wxcloudrun.dto.RegRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.tencent.wxcloudrun.config.ApiResponse;
@@ -78,6 +79,17 @@ public class CounterController {
     } else {
       return ApiResponse.error("参数action错误");
     }
+  }
+
+  /**
+   * 更新计数，自增或者清零
+   * @param request {@link RegRequest}
+   * @return API response json
+   */
+  @PostMapping(value = "/api/reginfo")
+  ApiResponse dataFromPhone(@RequestBody RegRequest request) {
+    logger.info("/api/reginfo post request, action: {}", request.getAction());
+    return ApiResponse.ok(0);
   }
   
 }
