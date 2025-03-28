@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.CountersMapper;
 import com.tencent.wxcloudrun.model.Counter;
+import com.tencent.wxcloudrun.model.RegInfoItem;
 import com.tencent.wxcloudrun.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,10 @@ public class CounterServiceImpl implements CounterService {
   @Override
   public void clearCount(Integer id) {
     countersMapper.clearCount(id);
+  }
+
+  @Override
+  public void insertRegInfo(RegInfoItem regInfoItem) {
+    countersMapper.insertRegInfo(regInfoItem);
   }
 }
