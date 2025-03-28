@@ -4,14 +4,9 @@ import com.tencent.wxcloudrun.model.Counter;
 import com.tencent.wxcloudrun.model.RegInfoItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import java.util.List;
 
 @Mapper
-public interface CountersMapper {
+public interface RegInfoMapper {
 
-  Counter getCounter(@Param("id") Integer id);
-
-  void upsertCount(Counter counter);
-
-  void clearCount(@Param("id") Integer id);
+  void insertRegInfo(RegInfoItem regInfoItem);
 }

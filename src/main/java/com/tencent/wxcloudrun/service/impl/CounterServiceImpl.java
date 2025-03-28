@@ -34,8 +34,4 @@ public class CounterServiceImpl implements CounterService {
     countersMapper.clearCount(id);
   }
 
-  @Override
-  public void insertRegInfo(RegInfoItem regInfoItem) {
-    countersMapper.insertRegInfo(regInfoItem);
-  }
 }

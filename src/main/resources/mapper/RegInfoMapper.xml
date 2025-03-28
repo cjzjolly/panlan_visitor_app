@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.">
+
+    <resultMap id="regInfoMapper" type="com.tencent.wxcloudrun.model.RegInfoItem">
+<!--        <id property="id" column="id"/>-->
+<!--        <result property="count" column="count"/>-->
+<!--        <result property="createdAt" column="createdAt" javaType="java.time.LocalDateTime" />-->
+<!--        <result property="updatedAt" column="updatedAt" javaType="java.time.LocalDateTime"  />-->
+
+    </resultMap>
+
+<!--    更新登记信息表-->
+    <update id="insertRegInfo" parameterType="com.tencent.wxcloudrun.model.RegInfoItem">
+        INSERT INTO `RegInfo`(`company`, `visitorName`, `visitorFromAddr`, `visitorTel`, `visitorCount`, `visitorCarID`, `visitorTime`, `remark`, `visitorToAddr`, `visitorToApartment`, `visitorsReceptionistName`, `visitorsReceptionistTel`)
+        VALUE(#{company}, #{visitorName}, #{visitorFromAddr}, #{visitorTel}, #{visitorCount}, #{visitorCarID}, #{visitorTime}, #{remark}, #{visitorToAddr}, #{visitorToApartment}, #{visitorsReceptionistName}, #{visitorsReceptionistTel})
+    </update>
+</mapper>
+

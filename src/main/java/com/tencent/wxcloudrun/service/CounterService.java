@@ -13,7 +13,4 @@ public interface CounterService {
   void upsertCount(Counter counter);
 
   void clearCount(Integer id);
-
-  /**更新数据库中**/
-  void insertRegInfo(RegInfoItem regInfoItem);
 }
