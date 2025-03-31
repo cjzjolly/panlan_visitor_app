@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import com.google.gson.Gson;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -52,7 +53,13 @@ public class RegInfoController {
             regInfoItem.setVisitorTel((String) reginfoMap.get("visitorTel"));
             regInfoItem.setVisitorCount((int) Double.parseDouble((String) reginfoMap.get("visitorCount"))); // Gson 将数字解析为 Double
             regInfoItem.setVisitorCarID((String) reginfoMap.get("visitorCarID"));
-            regInfoItem.setVisitorTime(LocalDateTime.parse((String) reginfoMap.get("visitorTime")));
+            try {
+                // 定义自定义的日期时间格式
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                regInfoItem.setVisitorTime(LocalDateTime.parse((String) reginfoMap.get("visitorTime"), formatter));
+            } catch (Exception e) {
+                logger.error("cjztest Date parsing error: {}", e.getMessage());
+            }
             regInfoItem.setRemark((String) reginfoMap.get("remark"));
             regInfoItem.setVisitorToAddr((String) reginfoMap.get("visitorToAddr"));
             regInfoItem.setVisitorToApartment((String) reginfoMap.get("visitorToApartment"));
