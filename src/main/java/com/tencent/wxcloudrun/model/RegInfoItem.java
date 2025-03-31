@@ -18,7 +18,7 @@ public class RegInfoItem implements Serializable {
   /**来访人联系方式**/
   private String visitorTel;
   /**来访人数**/
-  private int visitorCount;
+  private Integer visitorCount;
   /**车牌号码**/
   private String visitorCarID;
   /**预约来访时间**/
