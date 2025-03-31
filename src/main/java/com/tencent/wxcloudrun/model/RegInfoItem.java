@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 /**访客登记信息**/
 @Data
 public class RegInfoItem implements Serializable {
+  private Integer id;
   /**公司名**/
   private String company;
   /**来访者**/

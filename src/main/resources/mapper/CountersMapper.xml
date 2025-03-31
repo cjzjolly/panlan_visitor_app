@@ -29,13 +29,5 @@
     </update>
 
 
-<!--    INSERT INTO `RegInfo`(`company`, `visitorName`, `visitorFromAddr`, `visitorTel`, `visitorCount`, `visitorCarID`, `visitorTime`, `remark`, `visitorToAddr`, `visitorToApartment`, `visitorsReceptionistName`, `visitorsReceptionistTel`)-->
-<!--    VALUE('公司名测试', '张三', '地址111', '123456', 1, '粤A123456', '2025-03-28 12:00', '备注111','到番禺电缆那', '看某个部门', '某个接待人', '789456123')-->
-
-<!--    更新登记信息表-->
-    <update id="insertRegInfo" parameterType="com.tencent.wxcloudrun.model.RegInfoItem">
-        INSERT INTO `RegInfo`(`company`, `visitorName`, `visitorFromAddr`, `visitorTel`, `visitorCount`, `visitorCarID`, `visitorTime`, `remark`, `visitorToAddr`, `visitorToApartment`, `visitorsReceptionistName`, `visitorsReceptionistTel`)
-        VALUE(#{company}, #{visitorName}, #{visitorFromAddr}, #{visitorTel}, #{visitorCount}, #{visitorCarID}, #{visitorTime}, #{remark}, #{visitorToAddr}, #{visitorToApartment}, #{visitorsReceptionistName}, #{visitorsReceptionistTel})
-    </update>
 </mapper>
 

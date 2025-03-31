@@ -3,11 +3,19 @@
 <mapper namespace="com.tencent.wxcloudrun.dao.">
 
     <resultMap id="regInfoMapper" type="com.tencent.wxcloudrun.model.RegInfoItem">
-<!--        <id property="id" column="id"/>-->
-<!--        <result property="count" column="count"/>-->
-<!--        <result property="createdAt" column="createdAt" javaType="java.time.LocalDateTime" />-->
-<!--        <result property="updatedAt" column="updatedAt" javaType="java.time.LocalDateTime"  />-->
-
+        <id property="id" column="id"/>
+        <result property="company" column="company" javaType="java.lang.String" />
+        <result property="visitorName" column="visitorName" javaType="java.lang.String" />
+        <result property="visitorFromAddr" column="visitorFromAddr" javaType="java.lang.String" />
+        <result property="visitorTel" column="visitorTel" javaType="java.lang.String" />
+        <result property="visitorCount" column="visitorCount" />
+        <result property="visitorCarID" column="visitorCarID" javaType="java.lang.String" />
+        <result property="visitorTime" column="visitorTime" javaType="java.time.LocalDateTime" />
+        <result property="remark" column="remark" javaType="java.lang.String" />
+        <result property="visitorToAddr" column="visitorToAddr" javaType="java.lang.String" />
+        <result property="visitorToApartment" column="visitorToApartment" javaType="java.lang.String" />
+        <result property="visitorsReceptionistName" column="visitorsReceptionistName" javaType="java.lang.String" />
+        <result property="visitorsReceptionistTel" column="visitorsReceptionistTel" javaType="java.lang.String" />
     </resultMap>
 
 <!--    更新登记信息表-->
