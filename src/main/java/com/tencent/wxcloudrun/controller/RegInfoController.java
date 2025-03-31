@@ -50,7 +50,7 @@ public class RegInfoController {
             regInfoItem.setVisitorName((String) reginfoMap.get("visitorName"));
             regInfoItem.setVisitorFromAddr((String) reginfoMap.get("visitorFromAddr"));
             regInfoItem.setVisitorTel((String) reginfoMap.get("visitorTel"));
-            regInfoItem.setVisitorCount((int) reginfoMap.get("visitorCount")); // Gson 将数字解析为 Double
+            regInfoItem.setVisitorCount((int) Double.parseDouble((String) reginfoMap.get("visitorCount"))); // Gson 将数字解析为 Double
             regInfoItem.setVisitorCarID((String) reginfoMap.get("visitorCarID"));
             regInfoItem.setVisitorTime(LocalDateTime.parse((String) reginfoMap.get("visitorTime")));
             regInfoItem.setRemark((String) reginfoMap.get("remark"));
@@ -60,7 +60,7 @@ public class RegInfoController {
             regInfoItem.setVisitorsReceptionistTel((String) reginfoMap.get("visitorsReceptionistTel"));
             logger.info("/api/reginfo post received success.");
         } catch (Exception e) {
-            logger.error("cjztest /api/reginfo post request, error: {}", e.getMessage());
+            logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
             return ApiResponse.error(e.getMessage());
         }
         regInfoService.insertRegInfo(regInfoItem);
