@@ -60,6 +60,7 @@ public class RegInfoController {
             regInfoItem.setVisitorsReceptionistTel((String) reginfoMap.get("visitorsReceptionistTel"));
             logger.info("/api/reginfo post received success.");
         } catch (Exception e) {
+            logger.error("cjztest /api/reginfo post request, error: {}", e.getMessage());
             return ApiResponse.error(e.getMessage());
         }
         regInfoService.insertRegInfo(regInfoItem);
