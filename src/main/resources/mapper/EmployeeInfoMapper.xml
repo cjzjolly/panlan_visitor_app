@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.EmployeeInfoMapper">
+
+    <resultMap id="EmployeeInfoMapper" type="com.tencent.wxcloudrun.model.EmployeeInfoItem">
+        <id property="id" column="id"/>
+        <result property="empolyerName" column="empolyerName" javaType="java.lang.String" />
+        <result property="pwd" column="pwd" javaType="java.lang.String" />
+    </resultMap>
+
+    <select id="employeeInfoCheck" resultMap="regInfoMapper" parameterType="java.lang.Integer">
+        SELECT COUNT(*) FROM `empolyerInfo` WHERE `empolyerName` = #{empolyerName} AND `pwd` = #{pwd}
+    </select>
+</mapper>
+
