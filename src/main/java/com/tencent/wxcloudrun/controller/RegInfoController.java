@@ -43,10 +43,14 @@ public class RegInfoController {
     @PostMapping(value = "/api/reginfo")
     ApiResponse dataFromPhone(@RequestBody RegRequest request) {
         logger.info("/api/reginfo post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
         RegInfoItem regInfoItem = new RegInfoItem();
         try {
             // 将 action 字符串解析为 Map
-            Map<String, Object> reginfoMap = gson.fromJson(request.getAction(), Map.class);
+            Map<String, Object> reginfoMap = gson.fromJson(action, Map.class);
             regInfoItem.setCompany((String) reginfoMap.get("company"));
             regInfoItem.setVisitorName((String) reginfoMap.get("visitorName"));
             regInfoItem.setVisitorFromAddr((String) reginfoMap.get("visitorFromAddr"));
