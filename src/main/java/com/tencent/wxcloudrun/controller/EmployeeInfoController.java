@@ -44,10 +44,7 @@ public class EmployeeInfoController {
         boolean isRight = false;
         try {
             Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
-            EmployeeInfoItem employeeInfoItem = new EmployeeInfoItem();
-            employeeInfoItem.setEmpolyerName((String) employeeInfo.get("name"));
-            employeeInfoItem.setPwd((String) employeeInfo.get("pwd"));
-            isRight = employeeInfoService.employeeInfoCheck(employeeInfoItem);
+            isRight = employeeInfoService.employeeInfoCheck((String) employeeInfo.get("name"), (String) employeeInfo.get("pwd")).isPresent();
         } catch (Exception e) {
             logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
             return ApiResponse.error(e.getMessage());

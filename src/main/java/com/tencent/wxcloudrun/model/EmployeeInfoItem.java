@@ -12,4 +12,7 @@ public class EmployeeInfoItem implements Serializable {
     private String empolyerName;
     /**用户密码**/
     private String pwd;
+
+    private String emplyerDept;
+    private String empolyerArea;
 }

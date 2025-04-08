@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface EmployeeInfoMapper {
 
-  Integer employeeInfoCheck(@Param("empolyerName") String empolyerName, @Param("pwd") String pwd);
+  EmployeeInfoItem employeeInfoCheck(@Param("empolyerName") String empolyerName, @Param("pwd") String pwd);
 
 }

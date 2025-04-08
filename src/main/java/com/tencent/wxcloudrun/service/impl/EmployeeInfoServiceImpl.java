@@ -9,6 +9,8 @@ import com.tencent.wxcloudrun.service.RegInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   final EmployeeInfoMapper employeeInfoMapper;
@@ -18,7 +20,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  public boolean employeeInfoCheck(EmployeeInfoItem employeeInfoItem) {
-      return employeeInfoMapper.employeeInfoCheck(employeeInfoItem.getEmpolyerName(), employeeInfoItem.getPwd()) >= 1;
+  public Optional<EmployeeInfoItem> employeeInfoCheck(String empolyerName, String pwd) {
+    return Optional.ofNullable(employeeInfoMapper.employeeInfoCheck(empolyerName, pwd));
   }
 }
