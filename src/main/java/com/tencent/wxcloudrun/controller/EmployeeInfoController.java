@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class EmployeeInfoController {
@@ -44,7 +45,8 @@ public class EmployeeInfoController {
         boolean isRight = false;
         try {
             Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
-            isRight = employeeInfoService.employeeInfoCheck((String) employeeInfo.get("name"), (String) employeeInfo.get("pwd")).isPresent();
+            Optional<EmployeeInfoItem> employeeInfoItem = employeeInfoService.employeeInfoCheck((String) employeeInfo.get("name"), (String) employeeInfo.get("pwd"));
+            employeeInfoItem.ifPresent(infoItem -> logger.info("/api/checkEmployeeCountInfo return test: {}", infoItem.getPwd()));
         } catch (Exception e) {
             logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
             return ApiResponse.error(e.getMessage());
