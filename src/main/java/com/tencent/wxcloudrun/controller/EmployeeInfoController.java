@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @RestController
 public class EmployeeInfoController {
@@ -42,7 +43,6 @@ public class EmployeeInfoController {
         if (action == null) {
             return ApiResponse.error("request action is null");
         }
-        boolean isRight = false;
         try {
             Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
             String empolyerName = ((String) employeeInfo.get("empolyerName")).trim();
@@ -50,11 +50,17 @@ public class EmployeeInfoController {
             logger.info("/api/checkEmployeeCountInfo post request, empolyerName: {}", empolyerName);
             logger.info("/api/checkEmployeeCountInfo post request, pwd: {}", pwd);
             Optional<EmployeeInfoItem> employeeInfoItem = employeeInfoService.employeeInfoCheck(empolyerName, pwd);
-            employeeInfoItem.ifPresent(infoItem -> logger.info("/api/checkEmployeeCountInfo return test: {}", infoItem.getPwd()));
+            if (employeeInfoItem.isPresent()) {
+                EmployeeInfoItem infoItem= employeeInfoItem.get();
+                logger.info("/api/checkEmployeeCountInfo return test: {}", infoItem.getPwd());
+                if (infoItem.getPwd().equals(pwd) && infoItem.getEmpolyerName().equals(empolyerName)) {
+                    return ApiResponse.ok(1);
+                }
+            }
         } catch (Exception e) {
             logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
             return ApiResponse.error(e.getMessage());
         }
-        return ApiResponse.ok(isRight ? 1 : 0);
+        return ApiResponse.error("错误的用户名或密码.");
     }
 }
