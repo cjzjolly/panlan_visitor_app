@@ -45,7 +45,11 @@ public class EmployeeInfoController {
         boolean isRight = false;
         try {
             Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
-            Optional<EmployeeInfoItem> employeeInfoItem = employeeInfoService.employeeInfoCheck((String) employeeInfo.get("empolyerName"), (String) employeeInfo.get("pwd"));
+            String empolyerName = ((String) employeeInfo.get("empolyerName")).trim();
+            String pwd = ((String) employeeInfo.get("pwd")).trim();
+            logger.info("/api/checkEmployeeCountInfo post request, empolyerName: {}", empolyerName);
+            logger.info("/api/checkEmployeeCountInfo post request, pwd: {}", pwd);
+            Optional<EmployeeInfoItem> employeeInfoItem = employeeInfoService.employeeInfoCheck(empolyerName, pwd);
             employeeInfoItem.ifPresent(infoItem -> logger.info("/api/checkEmployeeCountInfo return test: {}", infoItem.getPwd()));
         } catch (Exception e) {
             logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
