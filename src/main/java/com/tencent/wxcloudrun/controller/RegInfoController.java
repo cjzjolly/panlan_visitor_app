@@ -46,7 +46,7 @@ public class RegInfoController {
         String action = request.getAction();
         try {
             Map<String, Object> pageParams = gson.fromJson(action, Map.class);
-            Optional<RegInfoItem> infoItem = regInfoService.getRegInfoItems((int) pageParams.get("pageNum"));
+            Optional<RegInfoItem> infoItem = regInfoService.getRegInfoItems(((Double) pageParams.get("pageNum")).intValue());
             String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
             logger.info("/api/getRegInfo get request, result: {}", infoStr);
             return ApiResponse.ok(infoStr);
