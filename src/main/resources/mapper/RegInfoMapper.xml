@@ -21,7 +21,7 @@
     <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.util.Map">
         SELECT * FROM RegInfo
         ORDER BY visitorTime
-        LIMIT #{pageSize} OFFSET #{offset}
+        LIMIT #{params.pageSize} OFFSET #{params.offset}
     </select>
 
     <update id="insertRegInfo" parameterType="com.tencent.wxcloudrun.model.RegInfoItem">

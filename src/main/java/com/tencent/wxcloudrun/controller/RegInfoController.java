@@ -50,8 +50,8 @@ public class RegInfoController {
             Map<String, Object> pageParams = gson.fromJson(action, Map.class);
             int pageNum = ((Double) pageParams.get("pageNum")).intValue();
             Map<String, Object> params = new HashMap<>();
-            params.put("offset", pageNum);
             params.put("pageSize", 50);
+            params.put("offset", (pageNum - 1) * 50);
             Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItems(params);
             String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
             logger.info("/api/getRegInfo get request, result: {}", infoStr);
