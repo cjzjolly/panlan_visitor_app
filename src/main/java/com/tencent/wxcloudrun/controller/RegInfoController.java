@@ -47,11 +47,11 @@ public class RegInfoController {
         try {
             Map<String, Object> pageParams = gson.fromJson(action, Map.class);
             Optional<RegInfoItem> infoItem = regInfoService.getRegInfoItems((int) pageParams.get("pageNum"));
-            String infoStr = gson.toJson(infoItem.orElse(new RegInfoItem()));
+            String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
             logger.info("/api/getRegInfo get request, result: {}", infoStr);
             return ApiResponse.ok(infoStr);
         } catch (Exception e) {
-            return ApiResponse.error("参数action错误");
+            return ApiResponse.error("参数action错误:\n" + e.getMessage());
         }
     }
 
