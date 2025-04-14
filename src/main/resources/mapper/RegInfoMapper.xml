@@ -18,6 +18,12 @@
         <result property="visitorsReceptionistTel" column="visitorsReceptionistTel" javaType="java.lang.String" />
     </resultMap>
 
+    <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.lang.Integer">
+        SELECT * FROM RegInfo
+        ORDER BY visitorTime
+        LIMIT 50 OFFSET (#{pageNum} - 1) * 50;
+    </select>
+
     <update id="insertRegInfo" parameterType="com.tencent.wxcloudrun.model.RegInfoItem">
         INSERT INTO `RegInfo`(`company`, `visitorName`, `visitorFromAddr`, `visitorTel`, `visitorCount`, `visitorCarID`, `visitorTime`, `remark`, `visitorToAddr`, `visitorToApartment`, `visitorsReceptionistName`, `visitorsReceptionistTel`)
         VALUE(#{company}, #{visitorName}, #{visitorFromAddr}, #{visitorTel}, #{visitorCount}, #{visitorCarID}, #{visitorTime}, #{remark}, #{visitorToAddr}, #{visitorToApartment}, #{visitorsReceptionistName}, #{visitorsReceptionistTel})

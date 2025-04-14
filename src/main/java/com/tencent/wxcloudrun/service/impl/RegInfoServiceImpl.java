@@ -6,6 +6,8 @@ import com.tencent.wxcloudrun.service.RegInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RegInfoServiceImpl implements RegInfoService {
 
@@ -13,6 +15,11 @@ public class RegInfoServiceImpl implements RegInfoService {
 
   public RegInfoServiceImpl(@Autowired RegInfoMapper regInfoMapper) {
     this.regInfoMapper = regInfoMapper;
+  }
+
+  @Override
+  public Optional<RegInfoItem> getRegInfoItems(Integer pageNum) {
+    return Optional.ofNullable(regInfoMapper.getRegInfoItems(pageNum));
   }
 
   @Override

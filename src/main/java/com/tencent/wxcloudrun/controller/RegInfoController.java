@@ -7,6 +7,7 @@ import com.tencent.wxcloudrun.service.RegInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.google.gson.Gson;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * counter控制器
@@ -32,6 +34,25 @@ public class RegInfoController {
         this.regInfoService = regInfoService;
         this.logger = LoggerFactory.getLogger(RegInfoController.class);
         this.gson = new Gson();
+    }
+
+    /**
+     * 分页地获取当前计数
+     * @return API response json
+     */
+    @GetMapping(value = "/api/getRegInfo")
+    ApiResponse getRegInfoCount(@RequestBody RegRequest request) {
+        logger.info("/api/getRegInfo get request, action: {}", request.getAction());
+        String action = request.getAction();
+        try {
+            Map<String, Object> pageParams = gson.fromJson(action, Map.class);
+            Optional<RegInfoItem> infoItem = regInfoService.getRegInfoItems((int) pageParams.get("pageNum"));
+            String infoStr = gson.toJson(infoItem.orElse(new RegInfoItem()));
+            logger.info("/api/getRegInfo get request, result: {}", infoStr);
+            return ApiResponse.ok(infoStr);
+        } catch (Exception e) {
+            return ApiResponse.error("参数action错误");
+        }
     }
 
     /**
