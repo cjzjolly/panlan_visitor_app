@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface RegInfoService {
 
-  Optional<RegInfoItem> getRegInfoItems( Integer pageNum);
+  Optional<RegInfoItem> getRegInfoItems(Integer pageNum);
 
 
   /**更新数据库中**/

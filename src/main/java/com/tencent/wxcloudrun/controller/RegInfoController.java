@@ -40,7 +40,7 @@ public class RegInfoController {
      * 分页地获取当前计数
      * @return API response json
      */
-    @GetMapping(value = "/api/getRegInfo")
+    @PostMapping(value = "/api/getRegInfo")
     ApiResponse getRegInfoCount(@RequestBody RegRequest request) {
         logger.info("/api/getRegInfo get request, action: {}", request.getAction());
         String action = request.getAction();
