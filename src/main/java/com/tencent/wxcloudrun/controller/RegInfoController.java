@@ -16,7 +16,9 @@ import java.time.LocalDateTime;
 import com.google.gson.Gson;
 
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -46,7 +48,11 @@ public class RegInfoController {
         String action = request.getAction();
         try {
             Map<String, Object> pageParams = gson.fromJson(action, Map.class);
-            Optional<RegInfoItem> infoItem = regInfoService.getRegInfoItems(((Double) pageParams.get("pageNum")).intValue());
+            int pageNum = ((Double) pageParams.get("pageNum")).intValue();
+            Map<String, Object> params = new HashMap<>();
+            params.put("offset", pageNum);
+            params.put("pageSize", 50);
+            Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItems(params);
             String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
             logger.info("/api/getRegInfo get request, result: {}", infoStr);
             return ApiResponse.ok(infoStr);

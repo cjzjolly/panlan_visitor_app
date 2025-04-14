@@ -18,10 +18,10 @@
         <result property="visitorsReceptionistTel" column="visitorsReceptionistTel" javaType="java.lang.String" />
     </resultMap>
 
-    <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.lang.Integer">
+    <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.util.Map">
         SELECT * FROM RegInfo
         ORDER BY visitorTime
-        LIMIT 50 OFFSET (#{pageNum} - 1) * 50;
+        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
     <update id="insertRegInfo" parameterType="com.tencent.wxcloudrun.model.RegInfoItem">
