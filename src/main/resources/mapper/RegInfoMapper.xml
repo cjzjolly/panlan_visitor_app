@@ -19,7 +19,7 @@
     </resultMap>
 
     <!-- 计算分页页数 -->
-    <select id="getRegInfoPageCount" resultType="int">
+    <select id="getRegInfoPageCount" resultMap="regInfoMapper" resultType="int">
         SELECT CEIL(COUNT(*) / #{pageSize}) FROM RegInfo
     </select>
 
