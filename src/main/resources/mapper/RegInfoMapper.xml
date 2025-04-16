@@ -18,6 +18,11 @@
         <result property="visitorsReceptionistTel" column="visitorsReceptionistTel" javaType="java.lang.String" />
     </resultMap>
 
+    <!-- 计算分页页数 -->
+    <select id="getRegInfoPageCount" resultType="int">
+        SELECT CEIL(COUNT(*) / #{pageSize}) FROM RegInfo
+    </select>
+
     <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.util.Map">
         SELECT * FROM RegInfo
         ORDER BY visitorTime

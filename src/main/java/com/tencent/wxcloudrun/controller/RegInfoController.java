@@ -62,6 +62,30 @@ public class RegInfoController {
     }
 
     /**
+     * 获取总页数
+     * 输入pageSize，获取按照pageSize数分页的页数
+     * @return API response json
+     */
+    @PostMapping(value = "/api/getRegInfoPageCount")
+    ApiResponse getRegInfoPageCount(@RequestBody RegRequest request) {
+        logger.info("/api/getRegInfoPageCount get request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> params = gson.fromJson(action, Map.class);
+            int pageSize = ((Double) params.get("pageSize")).intValue();
+            int pageCount = regInfoService.getTotalPages(pageSize);
+            logger.info("/api/getRegInfoPageCount result: {}", pageCount);
+            return ApiResponse.ok(pageCount);
+        } catch (Exception e) {
+            logger.error("cjztest /api/getRegInfoPageCount post request, error: {}", e.toString());
+            return ApiResponse.error(e.getMessage());
+        }
+    }
+
+    /**
      * 登记来访者信息
      *
      * @param request {@link RegRequest}

@@ -14,4 +14,7 @@ public interface RegInfoService {
 
   /**更新数据库中**/
   void insertRegInfo(RegInfoItem regInfoItem);
+
+  // 计算总页数
+  int getTotalPages(int pageSize);
 }

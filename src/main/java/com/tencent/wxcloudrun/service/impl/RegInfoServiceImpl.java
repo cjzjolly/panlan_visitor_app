@@ -19,11 +19,6 @@ public class RegInfoServiceImpl implements RegInfoService {
     this.regInfoMapper = regInfoMapper;
   }
 
-//  @Override
-//  public Optional<RegInfoItem> getRegInfoItems(Integer pageNum) {
-//    return Optional.ofNullable(regInfoMapper.getRegInfoItems(pageNum));
-//  }
-
   @Override
   public Optional<List<RegInfoItem>> getRegInfoItems(Map<String, Object> params) {
     return Optional.ofNullable(regInfoMapper.getRegInfoItems(params));
@@ -32,5 +27,10 @@ public class RegInfoServiceImpl implements RegInfoService {
   @Override
   public void insertRegInfo(RegInfoItem regInfoItem) {
     regInfoMapper.insertRegInfo(regInfoItem);
+  }
+
+  @Override
+  public int getTotalPages(int pageSize) {
+    return regInfoMapper.getTotalPages(pageSize);
   }
 }
