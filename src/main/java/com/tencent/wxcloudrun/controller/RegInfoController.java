@@ -50,12 +50,15 @@ public class RegInfoController {
             Map<String, Object> pageParams = gson.fromJson(action, Map.class);
             int pageNum = ((Double) pageParams.get("pageNum")).intValue();
             int pageSize = ((Double) pageParams.get("pageSize")).intValue();
+            String empolyerName = (String) pageParams.get("empolyerName");
             if (pageSize <= 0) {
                 pageSize = 50;
             }
             Map<String, Object> params = new HashMap<>();
             params.put("pageSize", pageSize);
             params.put("offset", (pageNum - 1) * pageSize);
+            //cjzmark todo 增加根据当前登录的员工进行，权限为0的可以查看所有预约信息，权限>0只能查看自己所属部门的数据
+            params.put("empolyerName", empolyerName);
             Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItems(params);
             String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
             logger.info("/api/getRegInfo get request, result: {}", infoStr);
