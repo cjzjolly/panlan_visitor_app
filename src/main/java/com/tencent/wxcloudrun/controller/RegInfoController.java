@@ -83,7 +83,11 @@ public class RegInfoController {
         try {
             Map<String, Object> params = gson.fromJson(action, Map.class);
             int pageSize = ((Double) params.get("pageSize")).intValue();
-            int pageCount = regInfoService.getTotalPages(pageSize);
+            String empolyerName = (String) params.get("empolyerName");
+            Map<String, Object> pageParams = gson.fromJson(action, Map.class);
+            pageParams.put("pageSize", pageSize);
+            pageParams.put("empolyerName", empolyerName);
+            int pageCount = regInfoService.getTotalPages(pageParams);
             logger.info("/api/getRegInfoPageCount result: {}", pageCount);
             return ApiResponse.ok(pageCount);
         } catch (Exception e) {

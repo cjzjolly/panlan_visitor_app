@@ -20,8 +20,12 @@
     </resultMap>
 
     <!-- 计算分页页数 -->
-    <select id="getTotalPages" resultType="int">
-        SELECT CEIL(COUNT(*) / #{pageSize}) FROM RegInfo
+    <select id="getTotalPages" resultType="int" parameterType="java.util.Map">
+        SELECT CEIL(COUNT(*) / #{params.pageSize}) FROM RegInfo
+        WHERE `visitorToApartment` = (
+            SELECT emplyerDept FROM empolyerInfo
+            WHERE empolyerName = #{params.empolyerName}
+        )
     </select>
 
     <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.util.Map">

@@ -30,7 +30,7 @@ public class RegInfoServiceImpl implements RegInfoService {
   }
 
   @Override
-  public int getTotalPages(int pageSize) {
-    return regInfoMapper.getTotalPages(pageSize);
+  public int getTotalPages(Map<String, Object> params) {
+    return regInfoMapper.getTotalPages(params);
   }
 }

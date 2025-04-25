@@ -15,5 +15,5 @@ public interface RegInfoMapper {
   void insertRegInfo(RegInfoItem regInfoItem);
 
   // 计算总页数
-  int getTotalPages(@Param("pageSize") int pageSize);
+  int getTotalPages(@Param("params") Map<String, Object> params);
 }
