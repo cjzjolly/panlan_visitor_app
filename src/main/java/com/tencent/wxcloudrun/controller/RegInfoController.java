@@ -131,15 +131,16 @@ public class RegInfoController {
             regInfoItem.setVisitorToApartment((String) reginfoMap.get("visitorToApartment"));
             regInfoItem.setVisitorsReceptionistName((String) reginfoMap.get("visitorsReceptionistName"));
             regInfoItem.setVisitorsReceptionistTel((String) reginfoMap.get("visitorsReceptionistTel"));
+            regInfoService.insertRegInfo(regInfoItem);
             logger.info("/api/reginfo post received success.");
         } catch (Exception e) {
             logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
             return ApiResponse.error(e.getMessage());
         }
-        regInfoService.insertRegInfo(regInfoItem);
         return ApiResponse.ok(0);
     }
 
+    /**删除某一预约条目**/
     @PostMapping(value = "/api/delreginfo")
     ApiResponse delreginfo(@RequestBody RegRequest request) {
         logger.info("/api/delreginfo post request, action: {}", request.getAction());

@@ -12,7 +12,7 @@ public interface RegInfoMapper {
 
   List<RegInfoItem> getRegInfoItems(@Param("params") Map<String, Object> params);
 
-  void insertRegInfo(RegInfoItem regInfoItem);
+  void insertRegInfo(@Param("params") RegInfoItem regInfoItem);
 
   // 计算总页数
   int getTotalPages(@Param("params") Map<String, Object> params);
