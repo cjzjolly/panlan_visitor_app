@@ -16,4 +16,6 @@ public interface RegInfoMapper {
 
   // 计算总页数
   int getTotalPages(@Param("params") Map<String, Object> params);
+
+  void deleteRegInfo(@Param("id") Integer id);
 }

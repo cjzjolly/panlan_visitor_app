@@ -19,6 +19,12 @@
         <result property="visitorsReceptionistTel" column="visitorsReceptionistTel" javaType="java.lang.String" />
     </resultMap>
 
+    <!-- 定义删除操作 -->
+    <delete id="deleteRegInfo" parameterType="java.lang.Integer">
+        DELETE FROM RegInfo
+        WHERE id = #{id}
+    </delete>
+
     <!-- 计算分页页数 -->
     <select id="getTotalPages" resultType="int" parameterType="java.util.Map">
         SELECT CEIL(COUNT(*) / #{params.pageSize}) FROM RegInfo

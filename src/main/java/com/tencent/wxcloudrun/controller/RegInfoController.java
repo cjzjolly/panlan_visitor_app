@@ -140,4 +140,23 @@ public class RegInfoController {
         return ApiResponse.ok(0);
     }
 
+    @PostMapping(value = "/api/delreginfo")
+    ApiResponse delreginfo(@RequestBody RegRequest request) {
+        logger.info("/api/delreginfo post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            // 将 action 字符串解析为 Map
+            Map<String, Object> reginfoMap = gson.fromJson(action, Map.class);
+            int deleteID = ((Double) reginfoMap.get("deleteid")).intValue();
+            regInfoService.deleteRegInfo(deleteID);
+        } catch (Exception e) {
+            logger.error("cjztest /api/reginfo post request, error: {}", e.toString());
+            return ApiResponse.error(e.getMessage());
+        }
+        return ApiResponse.ok(0);
+    }
+
 }
