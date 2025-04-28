@@ -11,5 +11,7 @@ public interface EmployeeInfoService {
     /**审查员工登录信息是否正确**/
     Optional<EmployeeInfoItem> employeeInfoCheck(String empolyerName, String pwd);
 
+    int employeeInfoExistCheck(String empolyerName);
+
     void insertUser(Map<String, Object> params);
 }

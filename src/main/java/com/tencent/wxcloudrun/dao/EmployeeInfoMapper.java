@@ -12,6 +12,8 @@ public interface EmployeeInfoMapper {
 
   EmployeeInfoItem employeeInfoCheck(@Param("empolyerName") String empolyerName, @Param("pwd") String pwd);
 
+  int employeeInfoExistCheck(@Param("empolyerName") String empolyerName);
+
   void insertUser(@Param("params") Map<String, Object> params);
 
 }

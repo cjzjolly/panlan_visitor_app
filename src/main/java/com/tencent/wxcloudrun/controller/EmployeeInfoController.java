@@ -78,6 +78,9 @@ public class EmployeeInfoController {
             String pwd = (String) employeeInfo.get("pwd");
             String emplyerDept = (String) employeeInfo.get("emplyerDept");
             String empolyerArea = (String) employeeInfo.get("empolyerArea");
+            if (employeeInfoService.employeeInfoExistCheck(name) >= 1) {
+                return ApiResponse.error("该用户已存在");
+            }
             Map<String, Object> params = new HashMap<>();
             params.put("empolyerName", name);
             params.put("pwd", pwd);

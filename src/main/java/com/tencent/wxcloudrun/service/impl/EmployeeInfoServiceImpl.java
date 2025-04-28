@@ -26,6 +26,12 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
+  public int employeeInfoExistCheck(String empolyerName) {
+    return employeeInfoMapper.employeeInfoExistCheck(empolyerName);
+  }
+
+
+  @Override
   public void insertUser(Map<String, Object> params) {
     employeeInfoMapper.insertUser(params);
   }
