@@ -17,5 +17,12 @@
         FROM `empolyerInfo`
         WHERE `empolyerName` = #{empolyerName} AND `pwd` = #{pwd}
     </select>
+
+<!--    注册新用户-->
+    <insert id="insertUser" parameterType="java.util.Map">
+        INSERT INTO `empolyerInfo` (`empolyerName`, `pwd`, `emplyerDept`, `empolyerArea`)
+        VALUES (#{params.empolyerName}, #{params.pwd}, #{params.emplyerDept}, #{params.empolyerArea});
+    </insert>
+
 </mapper>
 

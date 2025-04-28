@@ -5,9 +5,13 @@ import com.tencent.wxcloudrun.model.RegInfoItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Map;
+
 @Mapper
 public interface EmployeeInfoMapper {
 
   EmployeeInfoItem employeeInfoCheck(@Param("empolyerName") String empolyerName, @Param("pwd") String pwd);
+
+  void insertUser(@Param("params") Map<String, Object> params);
 
 }

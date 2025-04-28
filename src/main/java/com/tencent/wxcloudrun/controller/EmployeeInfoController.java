@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -62,5 +63,31 @@ public class EmployeeInfoController {
             return ApiResponse.error(e.getMessage());
         }
         return ApiResponse.error("错误的用户名或密码.");
+    }
+
+    @PostMapping(value = "/api/signinemployeeinfo")
+    ApiResponse signUpEmployeeInfo(@RequestBody EmployeeInfoRequest request) {
+        logger.info("/api/signinemployeeinfo post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
+            String name = (String) employeeInfo.get("empolyerName");
+            String pwd = (String) employeeInfo.get("pwd");
+            String emplyerDept = (String) employeeInfo.get("emplyerDept");
+            String empolyerArea = (String) employeeInfo.get("empolyerArea");
+            Map<String, Object> params = new HashMap<>();
+            params.put("empolyerName", name);
+            params.put("pwd", pwd);
+            params.put("emplyerDept", emplyerDept);
+            params.put("empolyerArea", empolyerArea);
+            employeeInfoService.insertUser(params);
+        } catch (Exception e) {
+            logger.error("cjztest /api/signinemployeeinfo post request, error: {}", e.toString());
+            return ApiResponse.error(e.getMessage());
+        }
+        return ApiResponse.ok(0);
     }
 }
