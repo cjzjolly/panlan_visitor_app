@@ -105,12 +105,26 @@ public class EmployeeInfoController {
         try {
             Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
             String name = (String) employeeInfo.get("empolyerName");
+            //用户不存在就提醒
+            if (employeeInfoService.employeeInfoExistCheck(name) < 1) {
+                return ApiResponse.error("该用户不存在");
+            }
+            //检查旧密码是否正确，不正确直接返回。
+            String oldPwd = (String) employeeInfo.get("oldPwd");
+            String oldPwdIncorrect = "和原密码不匹配";
+            Optional<EmployeeInfoItem> employeeInfoItem = employeeInfoService.employeeInfoCheck(name, oldPwd);
+            if (employeeInfoItem.isPresent()) {
+                EmployeeInfoItem infoItem= employeeInfoItem.get();
+                logger.info("/api/modifyUserInfo return test: {}", infoItem.getPwd());
+                if (! (infoItem.getPwd().equals(oldPwd) && infoItem.getEmpolyerName().equals(name))) {
+                    return ApiResponse.error(oldPwdIncorrect);
+                }
+            } else {
+                return ApiResponse.error(oldPwdIncorrect);
+            }
             String pwd = (String) employeeInfo.get("pwd");
             String emplyerDept = (String) employeeInfo.get("emplyerDept");
             String empolyerArea = (String) employeeInfo.get("empolyerArea");
-            if (employeeInfoService.employeeInfoExistCheck(name) >= 1) {
-                return ApiResponse.error("该用户已存在");
-            }
             Map<String, Object> params = new HashMap<>();
             params.put("empolyerName", name);
             params.put("pwd", pwd);
