@@ -35,4 +35,9 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   public void insertUser(Map<String, Object> params) {
     employeeInfoMapper.insertUser(params);
   }
+
+  @Override
+  public void modifyUserInfo(Map<String, Object> params) {
+    employeeInfoMapper.modifyUserInfo(params);
+  }
 }

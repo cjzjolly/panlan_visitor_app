@@ -29,5 +29,11 @@
         VALUES (#{params.empolyerName}, #{params.pwd}, #{params.emplyerDept}, #{params.empolyerArea});
     </insert>
 
+<!--    修改用户基础信息-->
+    <update id="modifyUserInfo" parameterType="java.util.Map">
+        update empolyerInfo
+        SET pwd = #{params.pwd}, empolyerArea = #{params.empolyerArea}, emplyerDept = #{params.emplyerDept}
+        WHERE empolyerName = #{params.empolyerName}
+    </update>
 </mapper>
 

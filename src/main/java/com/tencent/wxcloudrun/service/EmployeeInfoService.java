@@ -14,4 +14,6 @@ public interface EmployeeInfoService {
     int employeeInfoExistCheck(String empolyerName);
 
     void insertUser(Map<String, Object> params);
+
+    void modifyUserInfo(Map<String, Object> params);
 }

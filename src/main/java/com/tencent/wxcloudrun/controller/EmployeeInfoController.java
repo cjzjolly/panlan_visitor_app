@@ -93,4 +93,34 @@ public class EmployeeInfoController {
         }
         return ApiResponse.ok(0);
     }
+
+    /**用于修改用户账号信息**/
+    @PostMapping(value = "/api/modifyUserInfo")
+    ApiResponse modifyUserInfo(@RequestBody EmployeeInfoRequest request) {
+        logger.info("/api/modifyUserInfo post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> employeeInfo = gson.fromJson(request.getAction(), Map.class);
+            String name = (String) employeeInfo.get("empolyerName");
+            String pwd = (String) employeeInfo.get("pwd");
+            String emplyerDept = (String) employeeInfo.get("emplyerDept");
+            String empolyerArea = (String) employeeInfo.get("empolyerArea");
+            if (employeeInfoService.employeeInfoExistCheck(name) >= 1) {
+                return ApiResponse.error("该用户已存在");
+            }
+            Map<String, Object> params = new HashMap<>();
+            params.put("empolyerName", name);
+            params.put("pwd", pwd);
+            params.put("emplyerDept", emplyerDept);
+            params.put("empolyerArea", empolyerArea);
+            employeeInfoService.modifyUserInfo(params);
+        } catch (Exception e) {
+            logger.error("cjztest /api/modifyUserInfo post request, error: {}", e.toString());
+            return ApiResponse.error(e.getMessage());
+        }
+        return ApiResponse.ok(0);
+    }
 }

@@ -16,4 +16,6 @@ public interface EmployeeInfoMapper {
 
   void insertUser(@Param("params") Map<String, Object> params);
 
+  void modifyUserInfo(@Param("params") Map<String, Object> params);
+
 }
