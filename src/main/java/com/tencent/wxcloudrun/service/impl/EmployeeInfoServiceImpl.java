@@ -2,6 +2,7 @@ package com.tencent.wxcloudrun.service.impl;
 
 import com.tencent.wxcloudrun.dao.EmployeeInfoMapper;
 import com.tencent.wxcloudrun.dao.RegInfoMapper;
+import com.tencent.wxcloudrun.model.DepartmentIndex;
 import com.tencent.wxcloudrun.model.EmployeeInfoItem;
 import com.tencent.wxcloudrun.model.RegInfoItem;
 import com.tencent.wxcloudrun.service.EmployeeInfoService;
@@ -9,6 +10,7 @@ import com.tencent.wxcloudrun.service.RegInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,5 +41,10 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   @Override
   public void modifyUserInfo(Map<String, Object> params) {
     employeeInfoMapper.modifyUserInfo(params);
+  }
+
+  @Override
+  public List<DepartmentIndex> getAllDepartmentIndexes() {
+    return employeeInfoMapper.getAllDepartmentIndexes();
   }
 }

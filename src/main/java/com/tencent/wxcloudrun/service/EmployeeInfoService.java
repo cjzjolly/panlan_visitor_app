@@ -1,8 +1,10 @@
 package com.tencent.wxcloudrun.service;
 
+import com.tencent.wxcloudrun.model.DepartmentIndex;
 import com.tencent.wxcloudrun.model.EmployeeInfoItem;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,4 +18,6 @@ public interface EmployeeInfoService {
     void insertUser(Map<String, Object> params);
 
     void modifyUserInfo(Map<String, Object> params);
+
+    List<DepartmentIndex> getAllDepartmentIndexes();
 }

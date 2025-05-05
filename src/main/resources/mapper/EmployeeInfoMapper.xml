@@ -35,5 +35,15 @@
         SET pwd = #{params.pwd}, empolyerArea = #{params.empolyerArea}, emplyerDept = #{params.emplyerDept}
         WHERE empolyerName = #{params.empolyerName}
     </update>
+
+    <!-- 查询所有部门所属区域信息 -->
+    <resultMap id="departmentIndexMapper" type="com.tencent.wxcloudrun.model.DepartmentIndex">
+        <id property="id" column="id"/>
+        <result property="indexName" column="indexName" javaType="java.lang.String" />
+    </resultMap>
+
+    <select id="getAllDepartmentIndexes" resultMap="departmentIndexMapper">
+        SELECT * FROM departmenIndex
+    </select>
 </mapper>
 
