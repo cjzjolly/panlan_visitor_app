@@ -54,7 +54,7 @@
         <result property="power" column="power"/>
     </resultMap>
 
-    <select id="departmentList" resultMap="departmentMapper" parameterType="java.lang.String">
+    <select id="getDepartmentOfIndex" resultMap="departmentMapper" parameterType="java.lang.String">
         SELECT * FROM department WHERE departmentIndex = #{departmentIndex}
     </select>
 
