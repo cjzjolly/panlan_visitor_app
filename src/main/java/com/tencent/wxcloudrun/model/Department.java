@@ -10,5 +10,5 @@ public class Department implements Serializable {
     private String department;
     private String departmentIndex;
     /**权限，如果为0可以看所有的登记信息**/
-    private Integer power;
+    private int power;
 }

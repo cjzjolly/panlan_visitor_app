@@ -51,12 +51,11 @@
         <id property="id" column="id"/>
         <result property="department" column="department" javaType="java.lang.String" />
         <result property="departmentIndex" column="departmentIndex" javaType="java.lang.String" />
-        <result property="power" column="power" javaType="java.lang.Integer"/>
+        <result property="power" column="power"/>
     </resultMap>
 
     <select id="departmentList" resultMap="departmentMapper" parameterType="java.lang.String">
-        SELECT * FROM `department`
-        WHERE `departmentIndex` = #{departmentIndex}
+        SELECT * FROM department WHERE departmentIndex = #{departmentIndex}
     </select>
 
 </mapper>
