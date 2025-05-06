@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.service;
 
+import com.tencent.wxcloudrun.model.Department;
 import com.tencent.wxcloudrun.model.DepartmentIndex;
 import com.tencent.wxcloudrun.model.EmployeeInfoItem;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,6 @@ public interface EmployeeInfoService {
     void modifyUserInfo(Map<String, Object> params);
 
     List<DepartmentIndex> getAllDepartmentIndexes();
+
+    List<Department> getDepartmentOfIndex(String departmentIndex);
 }

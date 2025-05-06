@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.controller;
 import com.google.gson.Gson;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dto.EmployeeInfoRequest;
+import com.tencent.wxcloudrun.model.Department;
 import com.tencent.wxcloudrun.model.DepartmentIndex;
 import com.tencent.wxcloudrun.model.EmployeeInfoItem;
 import com.tencent.wxcloudrun.service.EmployeeInfoService;
@@ -140,7 +141,7 @@ public class EmployeeInfoController {
         return ApiResponse.ok(0);
     }
 
-    /**todo 获取可预约区域列表**/
+    /**获取可预约区域列表**/
     @PostMapping(value = "/api/getAllDepartmentIndexes")
     ApiResponse getAllDepartmentIndexes(@RequestBody EmployeeInfoRequest request) {
         logger.info("/api/getAllDepartmentIndexes post request, action: {}", request.getAction());
@@ -154,7 +155,27 @@ public class EmployeeInfoController {
                 return ApiResponse.error("request action is null");
             }
             String infoStr = gson.toJson(departmentIndices);
-            logger.info("/api/getRegInfo get request, result: {}", infoStr);
+            logger.info("/api/getAllDepartmentIndexes get request, result: {}", infoStr);
+            return ApiResponse.ok(infoStr);
+        } catch (Exception e) {
+            return ApiResponse.error("错误:\n" + e.getMessage());
+        }
+    }
+
+    /**获取预约区域对应的部门表**/
+    @PostMapping(value = "/api/getDepartmentOfArea")
+    ApiResponse getDepartmentOfArea(@RequestBody EmployeeInfoRequest request) {
+        logger.info("/api/getDepartmentOfArea post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> map = gson.fromJson(request.getAction(), Map.class);
+            String departmentIndex = (String) map.get("departmentIndex");
+            List<Department> departments = employeeInfoService.getDepartmentOfIndex(departmentIndex);
+            String infoStr = gson.toJson(departments);
+            logger.info("/api/getDepartmentOfArea get request, result: {}", infoStr);
             return ApiResponse.ok(infoStr);
         } catch (Exception e) {
             return ApiResponse.error("错误:\n" + e.getMessage());

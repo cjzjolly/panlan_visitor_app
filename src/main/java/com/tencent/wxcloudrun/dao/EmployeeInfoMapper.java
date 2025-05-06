@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.dao;
 
+import com.tencent.wxcloudrun.model.Department;
 import com.tencent.wxcloudrun.model.DepartmentIndex;
 import com.tencent.wxcloudrun.model.EmployeeInfoItem;
 import com.tencent.wxcloudrun.model.RegInfoItem;
@@ -21,4 +22,6 @@ public interface EmployeeInfoMapper {
   void modifyUserInfo(@Param("params") Map<String, Object> params);
 
   List<DepartmentIndex> getAllDepartmentIndexes();
+
+  List<Department> getDepartmentOfIndex(@Param("departmentIndex") String departmentIndex);
 }

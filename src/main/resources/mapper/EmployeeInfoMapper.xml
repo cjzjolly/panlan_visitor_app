@@ -45,5 +45,19 @@
     <select id="getAllDepartmentIndexes" resultMap="departmentIndexMapper">
         SELECT * FROM departmenIndex
     </select>
+
+    <!-- 查询所有部门所属区域信息 -->
+    <resultMap id="departmentMapper" type="com.tencent.wxcloudrun.model.Department">
+        <id property="id" column="id"/>
+        <result property="department" column="department" javaType="java.lang.String" />
+        <result property="departmentIndex" column="departmentIndex" javaType="java.lang.String" />
+        <result property="power" column="power" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <select id="departmentList" resultMap="departmentMapper" parameterType="java.lang.String">
+        SELECT * FROM `department`
+        WHERE `departmentIndex` = #{departmentIndex}
+    </select>
+
 </mapper>
 
