@@ -192,9 +192,10 @@ public class EmployeeInfoController {
         }
         try {
             Map<String, Object> map = gson.fromJson(request.getAction(), Map.class);
+            String departmentIndex = (String) map.get("departmentIndex");
             String department = (String) map.get("department");
             String pwd = (String) map.get("pwd");
-            int count = employeeInfoService.departmentCountCheck(department, pwd);
+            int count = employeeInfoService.departmentCountCheck(departmentIndex, department, pwd);
             boolean haveThisDepartment = count > 0;
             logger.info("/api/departmentCountCheck get request, result: {}", haveThisDepartment);
             return ApiResponse.ok(haveThisDepartment);
@@ -203,4 +204,23 @@ public class EmployeeInfoController {
         }
     }
 
+    @PostMapping(value = "/api/modifyDeptInfo")
+    ApiResponse modifyDeptInfo(@RequestBody EmployeeInfoRequest request) {
+        logger.info("/api/modifyDeptInfo post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> map = gson.fromJson(request.getAction(), Map.class);
+            String departmentIndex = (String) map.get("departmentIndex");
+            String department = (String) map.get("department");
+            String oldPwd = (String) map.get("oldPwd");
+            String newPwd = (String) map.get("newPwd");
+            employeeInfoService.modifyDeptInfo(departmentIndex, department, oldPwd, newPwd);
+            return ApiResponse.ok();
+        } catch (Exception e) {
+            return ApiResponse.error("错误:\n" + e.getMessage());
+        }
+    }
 }

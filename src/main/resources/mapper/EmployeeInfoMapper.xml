@@ -61,7 +61,15 @@
 
 <!--    检查以部门名为登录时密码是否正确-->
     <select id="departmentCountCheck" resultType="int" parameterType="java.lang.String">
-        SELECT count(*) FROM department WHERE department = #{department} AND pwd = #{pwd}
+        SELECT count(*) FROM department
+        WHERE departmentIndex = #{departmentIndex} AND department = #{department} AND pwd = #{pwd}
     </select>
+
+
+    <!--    修改部门账户基础信息-->
+    <update id="modifyDeptInfo" parameterType="java.util.String">
+        UPDATE department SET pwd = #{newPwd}
+        WHERE departmentIndex = #{departmentIndex} AND department = #{department} AND pwd = #{oldPwd}
+    </update>
 </mapper>
 

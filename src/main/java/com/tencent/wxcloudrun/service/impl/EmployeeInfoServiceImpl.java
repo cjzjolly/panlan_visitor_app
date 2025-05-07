@@ -55,7 +55,12 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   }
 
   @Override
-  public int departmentCountCheck(String department, String pwd) {
-    return employeeInfoMapper.departmentCountCheck(department, pwd);
+  public int departmentCountCheck(String departmentIndex, String department, String pwd) {
+    return employeeInfoMapper.departmentCountCheck(departmentIndex, department, pwd);
+  }
+
+  @Override
+  public void modifyDeptInfo(String departmentIndex, String department, String oldPwd, String newPwd) {
+    employeeInfoMapper.modifyDeptInfo(departmentIndex, department, oldPwd, newPwd);
   }
 }

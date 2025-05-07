@@ -24,5 +24,8 @@ public interface EmployeeInfoService {
 
     List<Department> getDepartmentOfIndex(String departmentIndex);
 
-    int departmentCountCheck(String department, String pwd);
+    int departmentCountCheck(String departmentIndex, String department, String pwd);
+
+    void modifyDeptInfo(String departmentIndex, String department, String oldPwd, String newPwd);
+
 }
