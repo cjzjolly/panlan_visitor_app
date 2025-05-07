@@ -24,4 +24,6 @@ public interface EmployeeInfoMapper {
   List<DepartmentIndex> getAllDepartmentIndexes();
 
   List<Department> getDepartmentOfIndex(@Param("departmentIndex") String departmentIndex);
+
+  int departmentCountCheck(@Param("department") String department, @Param("pwd") String pwd);
 }

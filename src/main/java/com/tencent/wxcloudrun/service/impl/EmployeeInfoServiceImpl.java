@@ -53,4 +53,9 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
   public List<Department> getDepartmentOfIndex(String departmentIndex) {
     return employeeInfoMapper.getDepartmentOfIndex(departmentIndex);
   }
+
+  @Override
+  public int departmentCountCheck(String department, String pwd) {
+    return employeeInfoMapper.departmentCountCheck(department, pwd);
+  }
 }

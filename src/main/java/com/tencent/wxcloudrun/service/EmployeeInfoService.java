@@ -23,4 +23,6 @@ public interface EmployeeInfoService {
     List<DepartmentIndex> getAllDepartmentIndexes();
 
     List<Department> getDepartmentOfIndex(String departmentIndex);
+
+    int departmentCountCheck(String department, String pwd);
 }

@@ -182,4 +182,25 @@ public class EmployeeInfoController {
         }
     }
 
+    /**用部门名做登录过程**/
+    @PostMapping(value = "/api/departmentCountCheck")
+    ApiResponse departmentCountCheck(@RequestBody EmployeeInfoRequest request) {
+        logger.info("/api/departmentCountCheck post request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> map = gson.fromJson(request.getAction(), Map.class);
+            String department = (String) map.get("department");
+            String pwd = (String) map.get("pwd");
+            int count = employeeInfoService.departmentCountCheck(department, pwd);
+            boolean haveThisDepartment = count > 0;
+            logger.info("/api/departmentCountCheck get request, result: {}", haveThisDepartment);
+            return ApiResponse.ok(haveThisDepartment);
+        } catch (Exception e) {
+            return ApiResponse.error("错误:\n" + e.getMessage());
+        }
+    }
+
 }

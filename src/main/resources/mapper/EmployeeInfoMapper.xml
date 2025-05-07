@@ -58,5 +58,10 @@
         SELECT * FROM department WHERE departmentIndex = #{departmentIndex}
     </select>
 
+
+<!--    检查以部门名为登录时密码是否正确-->
+    <select id="departmentCountCheck" resultType="int" parameterType="java.lang.String">
+        SELECT count(*) FROM department WHERE department = #{department} AND pwd = #{pwd}
+    </select>
 </mapper>
 
