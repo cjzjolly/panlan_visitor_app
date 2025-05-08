@@ -67,7 +67,7 @@
 
 
     <!--    修改部门账户基础信息-->
-    <update id="modifyDeptInfo" parameterType="java.util.String">
+    <update id="modifyDeptInfo" parameterType="java.lang.String">
         UPDATE department SET pwd = #{newPwd}
         WHERE departmentIndex = #{departmentIndex} AND department = #{department} AND pwd = #{oldPwd}
     </update>
