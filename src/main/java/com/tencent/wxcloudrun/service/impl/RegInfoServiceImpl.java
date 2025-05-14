@@ -25,6 +25,11 @@ public class RegInfoServiceImpl implements RegInfoService {
   }
 
   @Override
+  public Optional<List<RegInfoItem>> getRegInfoItemsByDepts(Map<String, Object> params) {
+    return Optional.ofNullable(regInfoMapper.getRegInfoItemsByDepts(params));
+  }
+
+  @Override
   public void insertRegInfo(RegInfoItem regInfoItem) {
     regInfoMapper.insertRegInfo(regInfoItem);
   }

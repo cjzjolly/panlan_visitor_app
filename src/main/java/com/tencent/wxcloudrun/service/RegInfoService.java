@@ -11,6 +11,7 @@ public interface RegInfoService {
 
   Optional<List<RegInfoItem>> getRegInfoItems(Map<String, Object> params);
 
+  Optional<List<RegInfoItem>> getRegInfoItemsByDepts(Map<String, Object> params);
 
   /**更新数据库中**/
   void insertRegInfo(RegInfoItem regInfoItem);

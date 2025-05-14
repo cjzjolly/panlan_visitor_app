@@ -68,6 +68,35 @@ public class RegInfoController {
         }
     }
 
+    /**cjzmark todo 通过区域、部门名为筛选条件获取预约记录**/
+    @PostMapping(value = "/api/getRegInfoByDept")
+    ApiResponse getRegInfoByDept(@RequestBody RegRequest request) {
+        logger.info("/api/getRegInfoByDept get request, action: {}", request.getAction());
+        String action = request.getAction();
+        try {
+            Map<String, Object> pageParams = gson.fromJson(action, Map.class);
+            int pageNum = ((Double) pageParams.get("pageNum")).intValue();
+            int pageSize = ((Double) pageParams.get("pageSize")).intValue();
+            String area = (String) pageParams.get("area");
+            String dept = (String) pageParams.get("dept");
+            if (pageSize <= 0) {
+                pageSize = 50;
+            }
+            Map<String, Object> params = new HashMap<>();
+            params.put("pageSize", pageSize);
+            params.put("offset", (pageNum - 1) * pageSize);
+            //cjzmark todo 增加根据当前登录的员工进行，权限为0的可以查看所有预约信息，权限>0只能查看自己所属部门的数据
+            params.put("area", area);
+            params.put("dept", dept);
+            Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItemsByDepts(params);
+            String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
+            logger.info("/api/getRegInfoByDept get request, result: {}", infoStr);
+            return ApiResponse.ok(infoStr);
+        } catch (Exception e) {
+            return ApiResponse.error("参数action错误:\n" + e.getMessage());
+        }
+    }
+
     /**
      * 获取总页数
      * 输入pageSize，获取按照pageSize数分页的页数
@@ -140,6 +169,8 @@ public class RegInfoController {
         return ApiResponse.ok(0);
     }
 
+
+
     /**删除某一预约条目**/
     @PostMapping(value = "/api/delreginfo")
     ApiResponse delreginfo(@RequestBody RegRequest request) {
@@ -159,5 +190,7 @@ public class RegInfoController {
         }
         return ApiResponse.ok(0);
     }
+
+
 
 }
