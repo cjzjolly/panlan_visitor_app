@@ -126,6 +126,36 @@ public class RegInfoController {
     }
 
     /**
+     * 通过区域、部门名获取总页数
+     * 输入pageSize，获取按照pageSize数分页的页数
+     * @return API response json
+     */
+    @PostMapping(value = "/api/getRegInfoPageCountByDept")
+    ApiResponse getRegInfoPageCountByDept(@RequestBody RegRequest request) {
+        logger.info("/api/getRegInfoPageCountByDept get request, action: {}", request.getAction());
+        String action = request.getAction();
+        if (action == null) {
+            return ApiResponse.error("request action is null");
+        }
+        try {
+            Map<String, Object> params = gson.fromJson(action, Map.class);
+            int pageSize = ((Double) params.get("pageSize")).intValue();
+            String area = (String) params.get("area");
+            String dept = (String) params.get("dept");
+            Map<String, Object> pageParams = gson.fromJson(action, Map.class);
+            pageParams.put("pageSize", pageSize);
+            pageParams.put("area", area);
+            pageParams.put("dept", dept);
+            int pageCount = regInfoService.getTotalPagesByDept(pageParams);
+            logger.info("/api/getRegInfoPageCountByDept result: {}", pageCount);
+            return ApiResponse.ok(pageCount);
+        } catch (Exception e) {
+            logger.error("cjztest /api/getRegInfoPageCountByDept post request, error: {}", e.toString());
+            return ApiResponse.error(e.getMessage());
+        }
+    }
+
+    /**
      * 登记来访者信息
      *
      * @param request {@link RegRequest}

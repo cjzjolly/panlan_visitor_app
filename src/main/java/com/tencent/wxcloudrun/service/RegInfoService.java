@@ -19,6 +19,8 @@ public interface RegInfoService {
   // 计算总页数
   int getTotalPages(Map<String, Object> params);
 
+  int getTotalPagesByDept(@Param("params") Map<String, Object> params);
+
   /**取消预约**/
   void deleteRegInfo(Integer id);
 }

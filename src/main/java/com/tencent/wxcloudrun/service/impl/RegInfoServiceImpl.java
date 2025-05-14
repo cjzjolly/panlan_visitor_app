@@ -40,6 +40,11 @@ public class RegInfoServiceImpl implements RegInfoService {
   }
 
   @Override
+  public int getTotalPagesByDept(Map<String, Object> params) {
+    return regInfoMapper.getTotalPagesByDept(params);
+  }
+
+  @Override
   public void deleteRegInfo(Integer id) {
     regInfoMapper.deleteRegInfo(id);
   }

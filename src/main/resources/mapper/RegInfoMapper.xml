@@ -34,6 +34,12 @@
         )
     </select>
 
+    <!-- 计算分页页数by 区域、部门筛选 -->
+    <select id="getTotalPagesByDept" resultType="int" parameterType="java.util.Map">
+        SELECT CEIL(COUNT(*) / #{params.pageSize}) FROM RegInfo
+        WHERE visitorToAddr = #{params.area} AND visitorToApartment = #{params.dept}
+    </select>
+
     <select id="getRegInfoItems" resultMap="regInfoMapper" parameterType="java.util.Map">
         SELECT * FROM RegInfo
         WHERE `visitorToApartment` = (
