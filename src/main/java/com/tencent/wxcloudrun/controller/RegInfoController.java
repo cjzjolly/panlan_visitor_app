@@ -68,6 +68,27 @@ public class RegInfoController {
         }
     }
 
+    /**
+     * 以database 表 ID为key获取
+     * @return API response json
+     */
+    @PostMapping(value = "/api/getRegInfoItemsByID")
+    ApiResponse getRegInfoByID(@RequestBody RegRequest request) {
+        logger.info("/api/getRegInfoItemsByID get request, action: {}", request.getAction());
+        String action = request.getAction();
+        try {
+            Map<String, Object> pageParams = gson.fromJson(action, Map.class);
+            int id = ((Double) pageParams.get("ID")).intValue();
+            Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItemsByID(id);
+            String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
+            logger.info("/api/getRegInfoItemsByID get request, result: {}", infoStr);
+            return ApiResponse.ok(infoStr);
+        } catch (Exception e) {
+            return ApiResponse.error("参数action错误:\n" + e.getMessage());
+        }
+    }
+
+
     /**cjzmark todo 通过区域、部门名为筛选条件获取预约记录**/
     @PostMapping(value = "/api/getRegInfoByDept")
     ApiResponse getRegInfoByDept(@RequestBody RegRequest request) {

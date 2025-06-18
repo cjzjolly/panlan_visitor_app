@@ -57,6 +57,11 @@
         LIMIT #{params.pageSize} OFFSET #{params.offset}
     </select>
 
+    <select id="getRegInfoItemsByID" resultMap="regInfoMapper" parameterType="java.lang.Integer">
+        SELECT * FROM RegInfo
+        WHERE id = #{id}
+    </select>
+
     <update id="insertRegInfo" parameterType="com.tencent.wxcloudrun.model.RegInfoItem">
         INSERT INTO `RegInfo`(`company`, `visitorName`, `visitorFromAddr`, `visitorTel`, `visitorCount`, `visitorCarID`, `visitorTime`, `remark`, `visitorToAddr`, `visitorToApartment`, `visitorsReceptionistName`, `visitorsReceptionistTel`)
         VALUE(#{params.company}, #{params.visitorName}, #{params.visitorFromAddr}, #{params.visitorTel}, #{params.visitorCount}, #{params.visitorCarID}, #{params.visitorTime}, #{params.remark}, #{params.visitorToAddr}, #{params.visitorToApartment}, #{params.visitorsReceptionistName}, #{params.visitorsReceptionistTel})

@@ -13,6 +13,8 @@ public interface RegInfoService {
 
   Optional<List<RegInfoItem>> getRegInfoItemsByDepts(Map<String, Object> params);
 
+  Optional<List<RegInfoItem>> getRegInfoItemsByID(Integer id);
+
   /**更新数据库中**/
   void insertRegInfo(RegInfoItem regInfoItem);
 

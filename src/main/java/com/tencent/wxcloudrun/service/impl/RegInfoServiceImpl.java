@@ -30,6 +30,11 @@ public class RegInfoServiceImpl implements RegInfoService {
   }
 
   @Override
+  public Optional<List<RegInfoItem>> getRegInfoItemsByID(Integer id) {
+    return Optional.ofNullable(regInfoMapper.getRegInfoItemsByID(id));
+  }
+
+  @Override
   public void insertRegInfo(RegInfoItem regInfoItem) {
     regInfoMapper.insertRegInfo(regInfoItem);
   }
