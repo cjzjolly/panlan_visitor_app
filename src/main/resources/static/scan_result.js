@@ -1,7 +1,7 @@
 
     function init() {
       // set({"action":"{\"ID\":1}"});
-      set(  {"ID" : 1} );
+      set({ID : 1});
     }
 
     function set(action) {
@@ -25,6 +25,7 @@
           $('td:contains("来访人数") + td').text(data.visitorCount || '');
           $('td:contains("车牌号码") + td').text(data.visitorCarID || '');
           $('td:contains("预约来访时间") + td').text(data.visitorTime || '');
+          $('td:contains("进入时间") + td').text(data.visitorTime || '');
           $('td:contains("到访地址") + td').text(data.visitorToAddr || '');
           $('td:contains("部门名称") + td').text(data.visitorToApartment || '');
           $('td:contains("接待人") + td').text(data.visitorsReceptionistName || '');
