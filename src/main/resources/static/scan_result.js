@@ -1,6 +1,7 @@
 
     function init() {
-      set({"action":"{\"ID\":1}"});
+      // set({"action":"{\"ID\":1}"});
+      set(  {"ID" : 1} );
     }
 
     function set(action) {
