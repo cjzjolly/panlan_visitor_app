@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--获取信息表ID，以ID方式查看对应数据-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登记信息查看</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .count-number {
+      align-self: flex-start;
+      opacity: 0.9;
+      font-weight: 500;
+      font-size: 14px;
+      color: #000000;
+    }
+    </style>
+</head>
+
+<body>
+
+
+
+<!--<div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin: 0">-->
+<!--      <span class="count-text">-->
+<!--        <span style="margin-right: 16px;">当前信息:</span>-->
+<!--        <span class="count-number"></span>-->
+<!--        <span class="count-reset" onclick="set('')"></span>-->
+<!--      </span>-->
+<!--</div>-->
+
+
+<h2>访客信息表格</h2>
+
+<table>
+    <tr>
+        <th>属性</th>
+        <th>值</th>
+    </tr>
+    <tr>
+        <td>访客信息</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>来访者</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>来访者公司名</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>来访人地址</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>来访人联系方式</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>来访人数</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>车牌号码</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>预约来访时间</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>实际来访时间</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>离开时间</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>到访地址</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>部门名称</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>接待人</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>接待人联系方式</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>备注</td>
+        <td></td>
+    </tr>
+</table>
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script>
+    function set(action) {
+      $.ajax("/api/getRegInfoItemsByID", {
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({
+          action: action,
+        }),
+      }).done(function (res) {
+        if (res && res.data !== undefined) {
+          const data = res.data;
+          // 填写表格
+          $('td:contains("访客信息") + td').text(data.visitorInfo || '');
+          $('td:contains("来访者") + td').text(data.visitorName || '');
+          $('td:contains("来访者公司名") + td').text(data.company || '');
+          $('td:contains("来访人地址") + td').text(data.visitorFromAddr || '');
+          $('td:contains("来访人联系方式") + td').text(data.visitorTel || '');
+          $('td:contains("来访人数") + td').text(data.visitorCount || '');
+          $('td:contains("车牌号码") + td').text(data.visitorCarID || '');
+          $('td:contains("预约来访时间") + td').text(data.visitorTime || '');
+          $('td:contains("到访地址") + td').text(data.visitorToAddr || '');
+          $('td:contains("部门名称") + td').text(data.visitorToApartment || '');
+          $('td:contains("接待人") + td').text(data.visitorsReceptionistName || '');
+          $('td:contains("接待人联系方式") + td').text(data.visitorsReceptionistTel || '');
+          $('td:contains("备注") + td').text(data.remark || '');
+        }
+      });
+    }
+    window.onload = function() {
+        // 在页面加载时调用 set 方法并传入一个 JSON 对象
+        set("{"action":"{\"ID\":1}"}"); // 这里可以传入你需要的 action
+     };
+</script>
+
+
+</html>
