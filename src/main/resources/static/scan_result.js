@@ -1,7 +1,8 @@
-function init() {
 
-}
-    
+    function init() {
+      set({"action":"{\"ID\":1}"});
+    }
+
     function set(action) {
       $.ajax("/api/getRegInfoItemsByID", {
         method: "POST",
@@ -33,6 +34,6 @@ function init() {
     }
 
     window.onload = function() {
-      set({"action":"{\"ID\":1}"});
       console.log("test test test ");
+      init();
     };
