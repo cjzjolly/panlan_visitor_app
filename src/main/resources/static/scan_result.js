@@ -1,6 +1,9 @@
 
     function init() {
-      set('{ID : 1}');
+      // 获取 URL 中的参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id'); // 获取 ID 值
+      set('{ID : ${id}}');
       // document.getElementsByClassName('company')[0].textContent = 'asdasdasd';
       // document.querySelector('.visitorName').textContent = 'asdasdasdasdasd';
     }
@@ -32,9 +35,9 @@
           const visitDate = data.visitorTime.date
           const visitTime = data.visitorTime.time
           // 格式化为“年月日时分秒”
-          const formattedDateTime = `${date.year}年${date.month}月${date.day}日 ${time.hour}时${time.minute}分${time.second}秒`;
+          const formattedDateTime = `${visitDate.year}年${visitDate.month}月${visitDate.day}日 ${time.hour}时${visitTime.minute}分${visitTime.second}秒`;
           
-          document.getElementsByClassName('visitorTime')[0].textContent = data.formattedDateTime;
+          document.getElementsByClassName('visitorTime')[0].textContent = formattedDateTime;
           document.getElementsByClassName('enterTime')[0].textContent = data.enterTime;
           document.getElementsByClassName('leaveTime')[0].textContent = data.leaveTime;
           document.getElementsByClassName('visitorToAddr')[0].textContent = data.visitorToAddr;
