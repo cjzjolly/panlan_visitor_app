@@ -19,7 +19,6 @@
           console.log("test test test:", jsonStr);
           // 解析 JSON 字符串
           const dataArray = JSON.parse(jsonStr);
-          // 访问 company 属性
           const data = dataArray[0];
           // 填写表格
           // document.getElementsByClassName('visitorInfo')[0].textContent = data.visitorInfo;
@@ -29,7 +28,13 @@
           document.getElementsByClassName('visitorTel')[0].textContent = data.visitorTel;
           document.getElementsByClassName('visitorCount')[0].textContent = data.visitorCount;
           document.getElementsByClassName('visitorCarID')[0].textContent = data.visitorCarID;
-          document.getElementsByClassName('visitorTime')[0].textContent = data.visitorTime;
+          
+          const visitDate = data.visitorTime.date
+          const visitTime = data.visitorTime.time
+          // 格式化为“年月日时分秒”
+          const formattedDateTime = `${date.year}年${date.month}月${date.day}日 ${time.hour}时${time.minute}分${time.second}秒`;
+          
+          document.getElementsByClassName('visitorTime')[0].textContent = data.formattedDateTime;
           document.getElementsByClassName('enterTime')[0].textContent = data.enterTime;
           document.getElementsByClassName('leaveTime')[0].textContent = data.leaveTime;
           document.getElementsByClassName('visitorToAddr')[0].textContent = data.visitorToAddr;
@@ -38,8 +43,8 @@
           document.getElementsByClassName('visitorsReceptionistTel')[0].textContent = data.visitorsReceptionistTel;
           document.getElementsByClassName('remark')[0].textContent = data.remark;
           
-          // document.querySelector('.visitorName').textContent = data.visitorName;
-        
+          
+
         }
       });
     }
