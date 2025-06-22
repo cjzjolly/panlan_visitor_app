@@ -1,7 +1,7 @@
 
     function init() {
-      // set('{ID : 1}');
-      document.getElementsByClassName('company')[0].textContent = 'asdasdasd';
+      set('{ID : 1}');
+      // document.getElementsByClassName('company')[0].textContent = 'asdasdasd';
     }
 
     function set(action) {
