@@ -2,6 +2,7 @@
     function init() {
       set('{ID : 1}');
       // document.getElementsByClassName('company')[0].textContent = 'asdasdasd';
+      // document.querySelector('.visitorName').textContent = 'asdasdasdasdasd';
     }
 
     function set(action) {
@@ -33,7 +34,6 @@
           // document.getElementsByClassName('visitorsReceptionistTel')[0].textContent = data.visitorsReceptionistTel;
           // document.getElementsByClassName('remark')[0].textContent = data.remark;
           
-          document.querySelector('.visitorInfo').textContent = data.visitorInfo;
           document.querySelector('.visitorName').textContent = data.visitorName;
         
         }
