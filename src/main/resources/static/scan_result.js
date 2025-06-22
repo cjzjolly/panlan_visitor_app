@@ -15,8 +15,12 @@
         }),
       }).done(function (res) {
         if (res && res.data !== undefined) {
-          const data = res.data[0];
-          console.log("test test test:", data);
+          const jsonStr = res.data;
+          console.log("test test test:", jsonStr);
+          // 解析 JSON 字符串
+          const dataArray = JSON.parse(jsonStr);
+          // 访问 company 属性
+          const data = dataArray[0];
           // 填写表格
           // document.getElementsByClassName('visitorInfo')[0].textContent = data.visitorInfo;
           document.getElementsByClassName('visitorName')[0].textContent = data.visitorName;
