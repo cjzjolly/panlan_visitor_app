@@ -18,7 +18,7 @@
           const data = res.data[0];
           console.log("test test test:", data);
           // 填写表格
-          document.getElementsByClassName('visitorInfo')[0].textContent = data.visitorInfo;
+          // document.getElementsByClassName('visitorInfo')[0].textContent = data.visitorInfo;
           document.getElementsByClassName('visitorName')[0].textContent = data.visitorName;
           document.getElementsByClassName('company')[0].textContent = data.company;
           document.getElementsByClassName('visitorFromAddr')[0].textContent = data.visitorFromAddr;
