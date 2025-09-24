@@ -79,11 +79,15 @@ public class RegInfoController {
         try {
             Map<String, Object> pageParams = gson.fromJson(action, Map.class);
             int id = ((Double) pageParams.get("ID")).intValue();
+            logger.info("/api/getRegInfoItemsByID get infoItem id is: {}", id);
+
             Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItemsByID(id);
+            logger.info("/api/getRegInfoItemsByID get infoItem isPresent: {}", infoItem.isPresent());
             String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
             logger.info("/api/getRegInfoItemsByID get request, result: {}", infoStr);
             return ApiResponse.ok(infoStr);
         } catch (Exception e) {
+            logger.error("/api/getRegInfoItemsByID error, result: {}", e.getMessage());
             return ApiResponse.error("参数action错误:\n" + e.getMessage());
         }
     }

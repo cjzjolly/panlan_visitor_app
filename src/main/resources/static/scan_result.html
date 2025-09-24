@@ -26,28 +26,49 @@
             background-color: #f1f1f1;
         }
 
-    .count-number {
-      align-self: flex-start;
-      opacity: 0.9;
-      font-weight: 500;
-      font-size: 14px;
-      color: #000000;
-    }
+        .count-number {
+            align-self: flex-start;
+            opacity: 0.9;
+            font-weight: 500;
+            font-size: 14px;
+            color: #000000;
+        }
+
+        /* 顶部bar样式 */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .top-bar input {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+        }
+        .top-bar button {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #28a745; /* 绿色 */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .top-bar button:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 
 <body>
 
-
-
-<!--<div style="text-align: center; display: flex; flex-direction: column; align-items: center; margin: 0">-->
-<!--      <span class="count-text">-->
-<!--        <span style="margin-right: 16px;">当前信息:</span>-->
-<!--        <span class="count-number"></span>-->
-<!--        <span class="count-reset" onclick="set('')"></span>-->
-<!--      </span>-->
-<!--</div>-->
-
+<!-- 顶部查询bar -->
+<div class="top-bar">
+    <input type="number" id="reservationCode" placeholder="预约码" autofocus>
+    <button id="queryBtn">查询</button>
+</div>
 
 <h2>访客信息表格</h2>
 
@@ -56,13 +77,21 @@
         <th>访客信息</th>
         <th>详情</th>
     </tr>
-<!--    <tr>-->
-<!--        <td>访客信息</td>-->
-<!--        <td class="visitorInfo"></td>-->
-<!--    </tr>-->
     <tr>
         <td>来访者</td>
         <td class="visitorName"></td>
+    </tr>
+    <tr>
+        <td>预约来访时间</td>
+        <td class="visitorTime"></td>
+    </tr>
+    <tr>
+        <td>进入时间</td>
+        <td class="enterTime"></td>
+    </tr>
+    <tr>
+        <td>离开时间</td>
+        <td class="leaveTime"></td>
     </tr>
     <tr>
         <td>来访者公司名</td>
@@ -83,18 +112,6 @@
     <tr>
         <td>车牌号码</td>
         <td class="visitorCarID"></td>
-    </tr>
-    <tr>
-        <td>预约来访时间</td>
-        <td class="visitorTime"></td>
-    </tr>
-    <tr>
-        <td>进入时间</td>
-        <td class="enterTime"></td>
-    </tr>
-    <tr>
-        <td>离开时间</td>
-        <td class="leaveTime"></td>
     </tr>
     <tr>
         <td>到访地址</td>
@@ -119,12 +136,26 @@
 </table>
 
 
-</body>
+<div class="top-bar">
+    <button id="vistorEnter">确认进入</button>
+    <button id="vistorExit">确认离开</button>
+</div>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 <script src="scan_result.js"></script>
 
+<script>
+    // 页面加载后自动聚焦到输入框（确保兼容性）
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("reservationCode").focus();
+    });
+</script>
 
+</body>
 </html>
