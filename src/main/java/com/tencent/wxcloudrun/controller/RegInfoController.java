@@ -7,10 +7,7 @@ import com.tencent.wxcloudrun.service.RegInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import com.google.gson.Gson;
@@ -73,14 +70,10 @@ public class RegInfoController {
      * @return API response json
      */
     @PostMapping(value = "/api/getRegInfoItemsByID")
-    ApiResponse getRegInfoByID(@RequestBody RegRequest request) {
-        logger.info("/api/getRegInfoItemsByID get request, action: {}", request.getAction());
-        String action = request.getAction();
+    ApiResponse getRegInfoByID(@RequestParam("id") int id) {
+        logger.info("/api/getRegInfoItemsByID get request, id: {}", id);
         try {
-            Map<String, Object> pageParams = gson.fromJson(action, Map.class);
-            int id = ((Double) pageParams.get("ID")).intValue();
             logger.info("/api/getRegInfoItemsByID get infoItem id is: {}", id);
-
             Optional<List<RegInfoItem>> infoItem = regInfoService.getRegInfoItemsByID(id);
             logger.info("/api/getRegInfoItemsByID get infoItem isPresent: {}", infoItem.isPresent());
             String infoStr = infoItem.isPresent() ? gson.toJson(infoItem.get()) : "";
