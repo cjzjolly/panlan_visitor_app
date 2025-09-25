@@ -3,19 +3,17 @@
       // 获取 URL 中的参数
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get('id'); // 获取 ID 值
-      set('{ID : ${id}}');
+      set(id);
       // document.getElementsByClassName('company')[0].textContent = 'asdasdasd';
       // document.querySelector('.visitorName').textContent = 'asdasdasdasdasd';
     }
 
-    function set(action) {
+    function set(id) {
       $.ajax("/api/getRegInfoItemsByID", {
         method: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: JSON.stringify({
-          action: action,
-        }),
+        data: { id: id } ,
       }).done(function (res) {
         if (res && res.data !== undefined) {
           const jsonStr = res.data;
